@@ -1,0 +1,46 @@
+.pecabranca {
+    background-color: white;
+    height: 50px;
+    width: 50px;
+    border: solid 2px black;
+    border-radius: 50px;
+}
+#divimg{margin: auto;
+text-align: center;}
+
+
+#tabuleiro img {
+    height: 600px;
+    
+    
+}
+
+#tabuleiro {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 600px;
+    width: 600px;
+    
+    
+}
+.posicoes{
+    text-align: center;
+}
+
+#pecasbrancasmesas{
+    display: flex;
+}
+
+#pecaspretasmesas{
+    display: flex;
+}
+
+.pecapreta{
+    height: 50px;
+    width: 50px;
+    border: solid 2px black;
+    border-radius: 50px;
+    background-color: brown;
+}
+

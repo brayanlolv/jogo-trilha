@@ -1,12 +1,10 @@
 
-import { vitima  } from "./scripts/funcs.js";
-import { renderMesas, setarbotoes, initbotoes, posicoes, buttonposition,limparbotoes} from "./scripts/init.js"
+import { vitima, select } from "./scripts/funcs.js";
+import { renderMesas, setarbotoes, initbotoes, posicoes, buttonposition, limparbotoes } from "./scripts/init.js"
 import { verifytripla } from "./scripts/verify.js"
-import {brancasmesasviewer,pretasmesasviewer} from "./scripts/variaveis.js"
+import { brancasmesasviewer, pretasmesasviewer } from "./scripts/variaveis.js"
 let btn = document.querySelector("#btnTeste");
-btn.addEventListener("click",limparbotoes)
-
-
+btn.addEventListener("click", segundaparte)
 
 initbotoes() // inicializar os botoes e gerar o array
 
@@ -33,40 +31,146 @@ let tabuleiro = [
     [0, 0, 0, 0, 0, 0, 0]
 ]
 
+function pecacor(brancasmesasnumber, pretasmesasnumber) { // funcao e escreve o nome da peca de acordo com o round index
+    let brancadiv = '<div class="pecabranca" >b</div>'
+    let pretadiv = '<div class="pecapreta" >p</div>'
+
+  
+     if (round % 2 == 0) {
+        brancasmesasnumber--
+        return brancadiv
+    }
+
+    else {
+        pretasmesasnumber--
+        return pretadiv
+    }
+
+}
 
 
-function proximaetapa(){
+function segundaparte() {
+
+    console.log("segunda parte")
+    part1()
+
+    let [m0,n0]=[0,0]
+    
+    function escolha(i) {
+        
+        m0 = buttonposition[i][0] - 1;
+        n0 = buttonposition[i][1] - 1;
+        let i0 = i;
+       
+        console.log("posicao inicial \n" + [m0, n0])
+        if(tabuleiro[m0][n0] ==pecaidround() ){
+            tabuleiro[m0][n0] = 0;
+            posicoes[i].innerHTML = incresepeca()
+            part2(i0)
+        }
+
+        
+    }
+
+
+    function novapocisao(i,i0) {
+
+        console.log("nova posicao \n" + buttonposition[i])
+        let mfinal = buttonposition[i][0] - 1;
+        let nfinal = buttonposition[i][1] - 1;
+        if(tabuleiro[mfinal][nfinal]==0){
+
+            tabuleiro[mfinal][nfinal] = pecaidround();
+            posicoes[i].innerHTML = pecacor();
+            posicoes[i0].innerHTML = "";
+            round++
+            
+            // verificar se tem triplas
+            if(verifytripla(m, n, tabuleiro, sidevalue).includes(true)){
+                console.log("come")
+                comer(sidevalue, primeiraparte)
+    
+            }
+
+
+      
+        segundaparte()
+        }
+        
+
+    }
+
+
+    function part1() {
+        limparbotoes()
+        setarbotoes(escolha)
+    }
+    function part2(i0) {
+        limparbotoes()
+        setarbotoes(novapocisao,i0)
+    }
+
+    function pecaidround(){// retorna qual valor da peca do round atual na matrix
+        if (round % 2 == 0){
+            return brancovalue
+        }
+        else{return pretovalue}
+    }
+
+    function incresepeca() {
+        //style="border-color: brown"
+        let brancadiv = '<div class="pecabranca" style="border-color: red" >foi</div>'
+        let pretadiv = '<div class="pecapreta" >foi</div>'
+
+        if (round % 2 == 0) {
+            brancasmesasnumber--
+            return brancadiv
+        }
+
+        else {
+            pretasmesasnumber--
+            return pretadiv
+        }
+
+    }
+
+
+
+}
+
+function proximaetapa() {
     console.log("proxima etapa")
 }
 
 function primeiraparte() {
 
-  
+
     setarbotoes(posicionar)
-    renderMesas(brancasmesasnumber,pretasmesasnumber,brancasmesasviewer,pretasmesasviewer)
+    renderMesas(brancasmesasnumber, pretasmesasnumber, brancasmesasviewer, pretasmesasviewer)
 
-}primeiraparte()
-
-
+} primeiraparte()
 
 
-function choiceEat(i,sidevalue,cb){//side value do comedor
 
- 
 
-    let m = buttonposition[i][0] -1
-    let n = buttonposition[i][1] -1 
-    vitima(sidevalue,brancovalue,pretovalue)
+function choiceEat(i, sidevalue, cb) {//side value do comedor
 
-    if(tabuleiro[m][n] == vitima(sidevalue,brancovalue,pretovalue)){
 
-        tabuleiro[m][n] = 0 ;
+
+    let m = buttonposition[i][0] - 1
+    let n = buttonposition[i][1] - 1
+
+
+    vitima(sidevalue, brancovalue, pretovalue)
+    if (tabuleiro[m][n] == vitima(sidevalue, brancovalue, pretovalue)) {
+
+        tabuleiro[m][n] = 0;
         posicoes[i].innerHTML = ""
-        sidevalue == brancovalue ? pretasemjogo--:brancaemjogo--
-        console.log("comeu "+[brancaemjogo,pretasemjogo])
+        sidevalue == brancovalue ? pretasemjogo-- : brancaemjogo--
+        console.log("comeu " + [brancaemjogo, pretasemjogo])
 
         ////teste
-       
+
         cb()
 
     }
@@ -74,16 +178,16 @@ function choiceEat(i,sidevalue,cb){//side value do comedor
 
 // limpar os event listeners
 
-function comer(sidevalue,cb){
+function comer(sidevalue, cb) {
 
     console.log("lapada seca")
     limparbotoes()
 
-    setarbotoes(choiceEat,sidevalue,cb)
+    setarbotoes(choiceEat, sidevalue, cb)
 
-   
 
-    
+
+
 }
 
 
@@ -92,56 +196,37 @@ function comer(sidevalue,cb){
 
 
 
+function posicionar(i) {
+    console.log("round" + round)
 
-function pecacor(){ // funcao e escreve o nome da peca de acordo com o round index
-
-    if(brancasmesasnumber <1 && pretasmesasnumber<1){
-        proximaetapa()
-    }
-
-    else if (round % 2 == 0 ){
-       brancasmesasnumber--
-        return '<div class="pecabranca">b</div>'
-    }
-    
-    else{
-        pretasmesasnumber--
-        return '<div class="pecapreta">p</div>'
-    }
-
-}
-
-function posicionar(i){
-    console.log("round"+round)
-
-    let m = buttonposition[i][0] -1
-    let n = buttonposition[i][1] -1 
+    let m = buttonposition[i][0] - 1
+    let n = buttonposition[i][1] - 1
     // conferindo se a  posicao do tabuleiro esta vazia
-    if(tabuleiro[m][n] == 0 ){
+    if (tabuleiro[m][n] == 0) {
 
 
-        
 
-        let sidevalue =  round % 2 == 0 ? brancovalue : pretovalue;
-        tabuleiro[m][n] = sidevalue 
+
+        let sidevalue = round % 2 == 0 ? brancovalue : pretovalue;
+        tabuleiro[m][n] = sidevalue
         posicoes[i].innerHTML = pecacor();
         round++
-        let tripla = verifytripla(m,n,tabuleiro,sidevalue)
 
-        if(tripla[0] == true || tripla[1] == true){
-            //chamar funcao de comer peca
-            console.log("come")
-            comer(sidevalue,primeiraparte)
-            
-        }
+    
+            if(verifytripla(m, n, tabuleiro, sidevalue).includes(true)){
         
+            console.log("come")
+            comer(sidevalue, primeiraparte)
+
+        }
+
 
         primeiraparte
     }
-    
-    
+
+
 
     // console.log(tabuleiro)
-    renderMesas(brancasmesasnumber,pretasmesasnumber,brancasmesasviewer,pretasmesasviewer)
+    renderMesas(brancasmesasnumber, pretasmesasnumber, brancasmesasviewer, pretasmesasviewer)
 
 }

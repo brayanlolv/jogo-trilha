@@ -7,6 +7,15 @@ function vitima(sidevalue,brancovalue,pretovalue){
     return vitima
 }
 
+function select(posicoes,i){
+
+    
 
 
-export {vitima}
+
+}
+
+
+
+
+export {vitima,select}

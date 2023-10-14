@@ -44,7 +44,7 @@ function limparbotoes() {
         let name = `div[name='${i}']`
 
         $(name).replaceWith($(name).clone());
-        console.log(name)
+       
 
     }
 }

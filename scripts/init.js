@@ -32,6 +32,8 @@ function initbotoes() {
 
         buttonposition.push(pos)
 
+        posicoes[i].innerHTML = ""//tirando os numeros das pocisicoes
+
     }
 
     return posicoes

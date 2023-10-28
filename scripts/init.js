@@ -21,10 +21,6 @@ let buttonposition = [] // exporta esssas variaveis
 
 
 function initbotoes() {
-
-
-    console.log("init botoes")
-
     for (let i = 0; i < posicoes.length; i++) {
 
         let pos = [parseInt(posicoes[i].innerHTML.charAt(1)),
@@ -49,15 +45,11 @@ function limparbotoes() {
        
 
     }
+    return true
 }
 
 
 function setarbotoes(func, param1, param2) {
-
-
-
-
-    console.log("setando")
     let posicoes = document.getElementsByClassName("posicoes")
     for (let i = 0; i < posicoes.length; i++) {
 
@@ -67,19 +59,4 @@ function setarbotoes(func, param1, param2) {
         })
     }
 }
-
-// function setarbotoes(func,param1,param2){
-
-//     let i = 0;
-
-//      while(i<posicoes.length){
-
-//         let event = ()=> func(i,param1,param2)
-
-//         posicoes[i].addEventListener("click",event)
-
-//      }
-// }
-
-
 export { renderMesas, setarbotoes, initbotoes, posicoes, buttonposition, limparbotoes, } 

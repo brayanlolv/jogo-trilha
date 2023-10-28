@@ -8,7 +8,21 @@
 #divimg{margin: auto;
 text-align: center;}
 
+#botaofora{
+    display: flex;
+    /* justify-content:space-between; */
+}
 
+#pecasMesas{
+    display: flex;
+    margin: 40px;
+    margin-top: 0px;
+}
+.pecasMesas{
+    display: flex;
+    flex-direction: column;
+
+}
 
 #tabuleiro img {
     height: 600px;

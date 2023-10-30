@@ -4,9 +4,9 @@ import { renderMesas, setarbotoes, initbotoes, buttonposition, limparbotoes } fr
 import { verifytripla } from "./scripts/verify.js"
 import { brancasmesasviewer, pretasmesasviewer } from "./scripts/variaveis.js"
 import { andar, includeArray } from "./scripts/andar.js"
-import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, sideValue } from "./scripts/tela.js";
+import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, sideValue, ganhou } from "./scripts/tela.js";
 let btn = document.querySelector("#btnTeste");
-btn.addEventListener("click", segundaparte)
+btn.addEventListener("click", ()=>console.log(tabuleiro))
 let tela = document.querySelector("#instrucoes")
 //btn.addEventListener("click", limparbotoes)
 let posicoes = document.getElementsByClassName("posicoes")
@@ -24,6 +24,9 @@ let player
 let brancovalue = 3//pecas brancas vao ter o valor na matrix 3
 let pretovalue = 4//pecas pretas vao ter o valor na matrix 5
 
+// ganhou(2,5,brancovalue)
+
+
 posicionarTela(pretovalue)//tratar isso depois com a tela de inicio
 
 let tabuleiro = [
@@ -37,14 +40,12 @@ let tabuleiro = [
 ]
 
 function pecacor() { // funcao e escreve o nome da peca de acordo com o round index
-    let brancadiv = '<div class="pecabranca" >b</div>'
-    let pretadiv = '<div class="pecapreta" >p</div>'
-
+    let brancadiv = '<div class="pecabranca"></div>'
+    let pretadiv = '<div class="pecapreta" ></div>'
     if (round % 2 == 0) {
         brancasmesasnumber--
         return brancadiv
     }
-
     else {
         pretasmesasnumber--
         return pretadiv
@@ -93,7 +94,8 @@ function segundaparte() {
 
             let sidevalue = round % 2 == 0 ? brancovalue : pretovalue
 
-            if (verifytripla(mfinal, nfinal, tabuleiro, sidevalue).includes(true)) {
+            let tem = verifytripla(m, n, tabuleiro, sidevalue)
+            if (tem[0]==true || tem[1] == true) {
                 console.log("come")
                 comer(sidevalue, segundaparte)
 
@@ -199,6 +201,10 @@ async function comer(sidevalue, cb) {
 
 }
 
+//debug
+console.log(verifytripla(1,3, tabuleiro,pretovalue))
+
+
 function posicionar(i) {
     //console.log("round" + round)
 
@@ -211,7 +217,10 @@ function posicionar(i) {
         tabuleiro[m][n] = sidevalue
         posicoes[i].innerHTML = pecacor();
 
-        if (verifytripla(m, n, tabuleiro, sidevalue).includes(true)) {
+        let tem = verifytripla(m, n, tabuleiro, sidevalue)
+        console.log(tem)
+        console.log([m,n])
+        if (tem[0]==true || tem[1] == true) {
 
             comer(sidevalue, primeiraparte)
         }

@@ -3,7 +3,7 @@ import { vitima, select } from "./scripts/funcs.js";
 import { renderMesas, setarbotoes, initbotoes, buttonposition, limparbotoes } from "./scripts/init.js"
 import { verifytripla } from "./scripts/verify.js"
 import { brancasmesasviewer, pretasmesasviewer } from "./scripts/variaveis.js"
-import { andar, includeArray } from "./scripts/andar.js"
+import { andar, includeArray, temPraOndeIr } from "./scripts/andar.js"
 import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, ganhou } from "./scripts/tela.js";
 let btn = document.querySelector("#btnTeste");
 let comecarBtn = document.querySelector("#comecar")
@@ -25,7 +25,6 @@ var pretasemjogo = 8
 var brancaemjogo = 8
 
 var round = 1; // par é peca branca
-let player
 let brancovalue = 3//pecas brancas vao ter o valor na matrix 3
 let pretovalue = 4//pecas pretas vao ter o valor na matrix 5
 
@@ -70,15 +69,19 @@ function segundaparte() {
     }
 
 
-    let [m0, n0] = [0, 0]
+    let [m0, n0] = [0, 0] //nao preciso inicilizar ?
+
     function escolha(i) {
 
         m0 = buttonposition[i][0] - 1;
         n0 = buttonposition[i][1] - 1;
-        let i0 = i;
 
-        //console.log("posicao inicial \n" + [m0, n0])
-        if (tabuleiro[m0][n0] == pecaidround()) {
+        let i0 = i; //preciso disso ?
+        const posicoesPossiveis = andar(m0,n0)
+
+        console.log(temPraOndeIr(tabuleiro,posicoesPossiveis))//apagar
+        if (tabuleiro[m0][n0] == pecaidround()&&      //por a resolucao pra resolver o problema de logica
+            temPraOndeIr(tabuleiro,posicoesPossiveis)) {
             tabuleiro[m0][n0] = 0;
             posicoes[i].innerHTML = incresepeca()
             part2(i0)
@@ -168,6 +171,7 @@ function primeiraparte() {
     let x = round % 2 == 0 ? brancovalue : pretovalue
     posicionarTela(x)
 
+
     if (brancasmesasnumber < 1 && pretasmesasnumber < 1) {
         console.log("acabou a primeira parte")
         return segundaparte()
@@ -193,10 +197,7 @@ function choiceEat(i, sidevalue, cb) {//side value do comedor
         console.log("comeu " + [brancaemjogo, pretasemjogo])
         round++
 
-
-
         cb()
-
     }
 }
 

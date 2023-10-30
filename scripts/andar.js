@@ -101,4 +101,14 @@ function includeArray(arrayPai, m, n) {
 
     return incluso
 }
-export { andar, includeArray }
+
+function temPraOndeIr(tabuleiro,array){
+    let x = false
+    array.map((element)=>{
+        if(tabuleiro[element[0]][element[1]]==0){
+            x = true
+        }
+    })
+    return x
+}
+export { andar, includeArray, temPraOndeIr }

@@ -4,9 +4,14 @@ import { renderMesas, setarbotoes, initbotoes, buttonposition, limparbotoes } fr
 import { verifytripla } from "./scripts/verify.js"
 import { brancasmesasviewer, pretasmesasviewer } from "./scripts/variaveis.js"
 import { andar, includeArray } from "./scripts/andar.js"
-import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, sideValue, ganhou } from "./scripts/tela.js";
+import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, ganhou } from "./scripts/tela.js";
 let btn = document.querySelector("#btnTeste");
-btn.addEventListener("click", ()=>console.log(tabuleiro))
+let comecarBtn = document.querySelector("#comecar")
+comecarBtn.addEventListener("click",()=>{
+    document.querySelector("#comecaDiv").remove()
+    primeiraparte()
+})
+btn.addEventListener("click", ()=>{ganhou(2,3)})
 let tela = document.querySelector("#instrucoes")
 //btn.addEventListener("click", limparbotoes)
 let posicoes = document.getElementsByClassName("posicoes")
@@ -54,9 +59,16 @@ function pecacor() { // funcao e escreve o nome da peca de acordo com o round in
 
 function segundaparte() {
 
+ 
+
     //pegando a peca pra mover
     console.log("segunda parte")
-    part1()
+
+    if(!ganhou(brancaemjogo,pretasemjogo)){
+        part1()
+
+    }
+
 
     let [m0, n0] = [0, 0]
     function escolha(i) {
@@ -94,7 +106,7 @@ function segundaparte() {
 
             let sidevalue = round % 2 == 0 ? brancovalue : pretovalue
 
-            let tem = verifytripla(m, n, tabuleiro, sidevalue)
+            let tem = verifytripla(mfinal, nfinal, tabuleiro, sidevalue)
             if (tem[0]==true || tem[1] == true) {
                 console.log("come")
                 comer(sidevalue, segundaparte)
@@ -159,14 +171,12 @@ function primeiraparte() {
     if (brancasmesasnumber < 1 && pretasmesasnumber < 1) {
         console.log("acabou a primeira parte")
         return segundaparte()
-    }
-
-    else {
+    }else if(!ganhou(brancaemjogo,pretasemjogo)){
         setarbotoes(posicionar)
         renderMesas(brancasmesasnumber, pretasmesasnumber, brancasmesasviewer, pretasmesasviewer)
     }
 
-} primeiraparte()
+}
 
 
 function choiceEat(i, sidevalue, cb) {//side value do comedor

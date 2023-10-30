@@ -18,8 +18,6 @@ function renderMesas(brancasmesasnumber, pretasmesasnumber, brancasmesasviewer, 
 let posicoes = document.getElementsByClassName("posicoes")
 let buttonposition = [] // exporta esssas variaveis
 
-
-
 function initbotoes() {
     for (let i = 0; i < posicoes.length; i++) {
 

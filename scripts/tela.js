@@ -4,8 +4,6 @@ let pretovalue = 4
 let body = document.querySelector("body")
 
 function ganhou(pecasB, pecasV) {
-
-
     if (pecasB < 3 || pecasV < 3) {
         let vencedor = pecasB < 3 ? "vermelha" : "branca"
         let x = `<div id="telaVencedor">
@@ -24,18 +22,6 @@ function ganhou(pecasB, pecasV) {
     } else {
         return false
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
@@ -48,7 +34,6 @@ function comerTela(sideValue) {
 
     tela.innerHTML = ` Peca ${x} escolha uma peca ${y} para comer`
 }
-
 
 function posicionarTela(sidevalue) {
 
@@ -66,7 +51,6 @@ function ondePorTela(sidevalue) {
     let a
     a = sidevalue == brancovalue ? "branca" : "vermelha"
     tela.innerHTML = `escolha onde deseja posiciona-la ${a}`
-
 }
 
 

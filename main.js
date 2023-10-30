@@ -5,13 +5,16 @@ import { verifytripla } from "./scripts/verify.js"
 import { brancasmesasviewer, pretasmesasviewer } from "./scripts/variaveis.js"
 import { andar, includeArray, temPraOndeIr } from "./scripts/andar.js"
 import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, ganhou } from "./scripts/tela.js";
-let btn = document.querySelector("#btnTeste");
+
+let btn = document.querySelector("#btnTeste");//apenas para teset e debug
+
 let comecarBtn = document.querySelector("#comecar")
 comecarBtn.addEventListener("click",()=>{
     document.querySelector("#comecaDiv").remove()
     primeiraparte()
 })
-btn.addEventListener("click", ()=>{ganhou(2,3)})
+
+btn.addEventListener("click",segundaparte)
 let tela = document.querySelector("#instrucoes")
 //btn.addEventListener("click", limparbotoes)
 let posicoes = document.getElementsByClassName("posicoes")
@@ -147,8 +150,8 @@ function segundaparte() {
 
     function incresepeca() {
         //style="border-color: brown"
-        let brancadiv = '<div class="pecabranca" style="border-color: red" >foi</div>'
-        let pretadiv = '<div class="pecapreta" >foi</div>'
+        let brancadiv = '<div class="pecabranca" style="border: 3px solid red" ></div>'
+        let pretadiv = '<div class="pecapreta"  style="border: 3px solid white"></div>'
 
         if (round % 2 == 0) {
             brancasmesasnumber--

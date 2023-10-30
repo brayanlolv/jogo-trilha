@@ -6,15 +6,13 @@ import { brancasmesasviewer, pretasmesasviewer } from "./scripts/variaveis.js"
 import { andar, includeArray, temPraOndeIr } from "./scripts/andar.js"
 import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, ganhou } from "./scripts/tela.js";
 
-let btn = document.querySelector("#btnTeste");//apenas para teset e debug
+
 
 let comecarBtn = document.querySelector("#comecar")
 comecarBtn.addEventListener("click",()=>{
     document.querySelector("#comecaDiv").remove()
     primeiraparte()
 })
-
-btn.addEventListener("click",segundaparte)
 let tela = document.querySelector("#instrucoes")
 //btn.addEventListener("click", limparbotoes)
 let posicoes = document.getElementsByClassName("posicoes")

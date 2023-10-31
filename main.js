@@ -1,5 +1,5 @@
 
-import { vitima, select } from "./scripts/funcs.js";
+import { vitima } from "./scripts/funcs.js";
 import { renderMesas, setarbotoes, initbotoes, buttonposition, limparbotoes } from "./scripts/init.js"
 import { verifytripla } from "./scripts/verify.js"
 import { brancasmesasviewer, pretasmesasviewer } from "./scripts/variaveis.js"
@@ -9,7 +9,7 @@ import { comerTela, posicionarTela, escolhaMoverTela, ondePorTela, ganhou } from
 
 
 let comecarBtn = document.querySelector("#comecar")
-comecarBtn.addEventListener("click",()=>{
+comecarBtn.addEventListener("click", () => {
     document.querySelector("#comecaDiv").remove()
     primeiraparte()
 })
@@ -44,6 +44,10 @@ let tabuleiro = [
     [0, 0, 0, 0, 0, 0, 0]
 ]
 
+
+
+
+
 function pecacor() { // funcao e escreve o nome da peca de acordo com o round index
     let brancadiv = '<div class="pecabranca"></div>'
     let pretadiv = '<div class="pecapreta" ></div>'
@@ -58,49 +62,42 @@ function pecacor() { // funcao e escreve o nome da peca de acordo com o round in
 }
 
 function segundaparte() {
-
- 
-
     //pegando a peca pra mover
-    console.log("segunda parte")
-
-    if(!ganhou(brancaemjogo,pretasemjogo)){
+    if (!ganhou(brancaemjogo, pretasemjogo)) {
         part1()
 
     }
 
-
-    let [m0, n0] = [0, 0] //nao preciso inicilizar ?
-
+    
     function escolha(i) {
 
-        m0 = buttonposition[i][0] - 1;
-        n0 = buttonposition[i][1] - 1;
+        const m = buttonposition[i][0] - 1;
+        const n = buttonposition[i][1] - 1;
 
-        let i0 = i; //preciso disso ?
-        const posicoesPossiveis = andar(m0,n0)
-
-        console.log(temPraOndeIr(tabuleiro,posicoesPossiveis))//apagar
-        if (tabuleiro[m0][n0] == pecaidround()&&      //por a resolucao pra resolver o problema de logica
-            temPraOndeIr(tabuleiro,posicoesPossiveis)) {
-            tabuleiro[m0][n0] = 0;
+        const posicoesPossiveis = andar(m,n)
+        console.log(temPraOndeIr(tabuleiro, posicoesPossiveis))//apagar
+        if (tabuleiro[m][n] == pecaidround() &&      //por a resolucao pra resolver o problema de logica
+            temPraOndeIr(tabuleiro, posicoesPossiveis)) {
+            tabuleiro[m][n] = 0;
             posicoes[i].innerHTML = incresepeca()
-            part2(i0)
+            part2(i)
         }
     }
-
 
     function novapocisao(i, i0) {
         //pondo a peca no lucar
 
-        let m0 = buttonposition[i0][0] - 1;
-        let n0 = buttonposition[i0][1] - 1;
-        let posicoesPossiveis = andar(m0, n0)
+        // console.log("parte2")
 
-        let mfinal = buttonposition[i][0] - 1;
-        let nfinal = buttonposition[i][1] - 1;
-        console.log(includeArray(posicoesPossiveis, mfinal, nfinal))
+        const mfinal = buttonposition[i][0] - 1;
+        const nfinal = buttonposition[i][1] - 1;
+        const m0 = buttonposition[i0][0] - 1;
+        const n0 = buttonposition[i0][1] - 1;
 
+        const posicoesPossiveis = andar(m0,n0)
+
+        // console.log(includeArray(posicoesPossiveis,m0,n0) )
+        // console.log(tabuleiro[mfinal][nfinal] == 0)
 
         if (includeArray(posicoesPossiveis, mfinal, nfinal) && tabuleiro[mfinal][nfinal] == 0) {
 
@@ -110,8 +107,9 @@ function segundaparte() {
 
             let sidevalue = round % 2 == 0 ? brancovalue : pretovalue
 
-            let tem = verifytripla(mfinal, nfinal, tabuleiro, sidevalue)
-            if (tem[0]==true || tem[1] == true) {
+            //let tem = verifytripla(mfinal, nfinal, tabuleiro, sidevalue)
+            //if (tem[0]==true || tem[1] == true) {
+            if (verifytripla(mfinal, nfinal, tabuleiro, sidevalue).includes(true)) {
                 console.log("come")
                 comer(sidevalue, segundaparte)
 
@@ -119,7 +117,7 @@ function segundaparte() {
                 segundaparte()
                 round++
                 let x = round % 2 == 0 ? brancovalue : pretovalue
-        escolhaMoverTela(x)
+                escolhaMoverTela(x)
             }
         }
     }
@@ -168,26 +166,21 @@ function segundaparte() {
 }
 
 function primeiraparte() {
-
-    let x = round % 2 == 0 ? brancovalue : pretovalue
-    posicionarTela(x)
-
+    posicionarTela(sideValue())
 
     if (brancasmesasnumber < 1 && pretasmesasnumber < 1) {
-        console.log("acabou a primeira parte")
-        return segundaparte()
-    }else if(!ganhou(brancaemjogo,pretasemjogo)){
+        segundaparte()
+    } else if (!ganhou(brancaemjogo, pretasemjogo)) {
         setarbotoes(posicionar)
         renderMesas(brancasmesasnumber, pretasmesasnumber, brancasmesasviewer, pretasmesasviewer)
     }
-
 }
 
 
 function choiceEat(i, sidevalue, cb) {//side value do comedor
 
-    let m = buttonposition[i][0] - 1
-    let n = buttonposition[i][1] - 1
+    const m = buttonposition[i][0] - 1
+    const n = buttonposition[i][1] - 1
 
     if (tabuleiro[m][n] == vitima(sidevalue, brancovalue, pretovalue)) {
 
@@ -195,57 +188,46 @@ function choiceEat(i, sidevalue, cb) {//side value do comedor
         posicoes[i].innerHTML = ""
         tabuleiro[m][n] = 0;
         sidevalue == brancovalue ? pretasemjogo-- : brancaemjogo--
-        console.log("comeu " + [brancaemjogo, pretasemjogo])
         round++
 
         cb()
     }
 }
 
-// limpar os event listeners
-
-async function comer(sidevalue, cb) {
-    console.log("come")
-    console.log(sidevalue)
+function comer(sidevalue, cb) {
     comerTela(sidevalue)
-    let x = await limparbotoes()
-    if (x) setarbotoes(choiceEat, sidevalue, cb)
+    limparbotoes()
+    setarbotoes(choiceEat, sidevalue, cb)
 
 }
 
-//debug
-console.log(verifytripla(1,3, tabuleiro,pretovalue))
-
-
 function posicionar(i) {
-    //console.log("round" + round)
+    const m = buttonposition[i][0] - 1
+    const n = buttonposition[i][1] - 1
 
-    let m = buttonposition[i][0] - 1
-    let n = buttonposition[i][1] - 1
     // conferindo se a  posicao do tabuleiro esta vazia
     if (tabuleiro[m][n] == 0) {
 
-        let sidevalue = round % 2 == 0 ? brancovalue : pretovalue;
+        let sidevalue = sideValue()
+
         tabuleiro[m][n] = sidevalue
         posicoes[i].innerHTML = pecacor();
 
-        let tem = verifytripla(m, n, tabuleiro, sidevalue)
-        console.log(tem)
-        console.log([m,n])
-        if (tem[0]==true || tem[1] == true) {
-
+        if (verifytripla(m, n, tabuleiro, sidevalue).includes(true)) {
             comer(sidevalue, primeiraparte)
         }
         else {
 
             primeiraparte()
             round++
-            let x = round % 2 == 0 ? brancovalue : pretovalue
-            posicionarTela(x)
+            posicionarTela(sideValue())
 
         }
     }
-    // console.log(tabuleiro)
     renderMesas(brancasmesasnumber, pretasmesasnumber, brancasmesasviewer, pretasmesasviewer)
 
+}
+
+function sideValue() {
+    return round % 2 == 0 ? brancovalue : pretovalue
 }

@@ -8,17 +8,12 @@ function somarvector(vector){
 }
 
 function somarcoluna(board,coluna){
-
-    let sum = 0
-
+ let sum = 0
     for(let m = 0;m < board.length;m++ ){
         sum += board[m][coluna]
     }
     return sum
-
 }
-
-
 function somarlinha(board,linha){
     let sum = 0
     for(let n = 0;n < board.length;n++ ){
@@ -71,18 +66,13 @@ function verifytripla(m,n,board,sidevalue){// side value é o valor q é passado
             somarvector(vetorManipulacao) == sidevalue * 3 ? nTrilpla= true: nTrilpla = false
             
         }
-
-        console.log(mTripla)
-
     }
-
-    else{ 
-        
+    else{
         somarcoluna(board,n) == sidevalue * 3 ? nTrilpla = true: nTrilpla = false 
     }
 
     return [mTripla,nTrilpla]
-    //console.log([mTripla,nTrilpla])
+
     
 }
 

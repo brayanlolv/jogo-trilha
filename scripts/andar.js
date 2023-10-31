@@ -1,16 +1,7 @@
-let position = [2, 4]
-
-console.log(position);
-const m = position[0] - 1
-const n = position[1] - 1
-
-
 function andar(m, n) {
 
     let result = []
-
-    // testar m
-    let l1, l2
+     let l1, l2
     switch (m) {// verifiacao para linha 1 e 7 
 
         case (0):
@@ -72,12 +63,10 @@ function andar(m, n) {
 
         case (2):   
         case (4):
-            l1 = m+ 1
-            l2 = m- 1
-            l1 < 5 ? result.push([l1,n]) :null
+            l1 = m + 1
+            l2 = m - 1
+            l1 < 5 ? result.push([l1,n]) : null
             l2 > 1 ? result.push([l2, n]) : null
-            
-
             break
 
         case (3):

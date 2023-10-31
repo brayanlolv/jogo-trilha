@@ -14,7 +14,6 @@ function renderMesas(brancasmesasnumber, pretasmesasnumber, brancasmesasviewer, 
     }
 }
 
-
 let posicoes = document.getElementsByClassName("posicoes")
 let buttonposition = [] // exporta esssas variaveis
 
@@ -43,7 +42,7 @@ function limparbotoes() {
        
 
     }
-    return true
+ 
 }
 
 

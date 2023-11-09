@@ -5,6 +5,12 @@
     p{
         text-indent:25px
     }
+    style{
+        display:none
+    }
+    head{
+        display:none
+    }
 </style></head>
 
 <h1><a href="https://brayanlolv.github.io/jogo-trilha/index.html"> jogo da trilha</a></h1>

@@ -1,9 +1,8 @@
-<style>
+<head><style>
     p{
         text-indent:25px
     }
-</style>
-
+</style></head>
 
 <a href="https://brayanlolv.github.io/jogo-trilha/index.html"> <h1>jogo da trilha</h1></a>
 

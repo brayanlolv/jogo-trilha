@@ -1,11 +1,13 @@
-<style>
+
+
+
+<head><style>
     p{
         text-indent:25px
     }
-</style>
+</style></head>
 
-
-<a href="https://brayanlolv.github.io/jogo-trilha/index.html"> <h1>jogo da trilha</h1></a>
+<h1><a href="https://brayanlolv.github.io/jogo-trilha/index.html"> jogo da trilha</a></h1>
 
 <p>Olá, essa é o jogo da trilha, eu fiz ele para um trabalho da faculdade que pedia um programa que aplicasse algum tipo de estrutura de dados, e no caso, dava como sugestão um  jogo do tabuleiro, então, foi escolhido o jogo da trilha
 </p>

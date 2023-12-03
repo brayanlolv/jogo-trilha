@@ -44,7 +44,7 @@ function posicionarTela(sidevalue) {
 function escolhaMoverTela(sidevalue) {
     let a
     a = sidevalue == brancovalue ? "branca" : "vermelha"
-    tela.innerHTML = `escolha qual peca ${a} desja mover `
+    tela.innerHTML = `escolha qual peca ${a} deseja mover `
 }
 
 function ondePorTela(sidevalue) {
